@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BusBoard.ConsoleApp
 {
-    class Arrival
+    internal class Arrival
     {
-        public string id { get; set; }
-        public string vehicleID { get; set; }
-        public string direction { get; set; }
-        public DateTime expectedArrival { get; set; }
+        public string VehicleID { get; set; }
+        public string Direction { get; set; }
+        public DateTime ExpectedArrival { get; set; }
+        public string stopType { get; set; }
     }
 }
