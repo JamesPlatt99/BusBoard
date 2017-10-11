@@ -7,7 +7,7 @@ namespace BusBoard.Api
 {
     public class GetLocalStopPoints
     {
-        public static List<StopPoint> ReturnStopPoints(UserLocation userLocation)
+        public static List<StopPoint> ReturnStopPoints(UserLocation userLocation, int radius)
         {
             RestClient client = new RestClient("https://api.tfl.gov.uk/");
             RestRequest request = new RestRequest("StopPoint", Method.GET);
@@ -15,17 +15,10 @@ namespace BusBoard.Api
             request.AddParameter("stopTypes", "NaptanPublicBusCoachTram");
             request.AddParameter("lat", userLocation.latitude.ToString());
             request.AddParameter("lon", userLocation.longitude.ToString());
-            request.AddParameter("radius", GetUserMaxDistanceFromStation().ToString());
+            request.AddParameter("radius", radius);
             IRestResponse response = client.Execute(request);
             return JsonConvert.DeserializeObject<LocalStopPointsResponse>(response.Content).StopPoints;
         }
 
-        private static int GetUserMaxDistanceFromStation()
-        {
-            int output;
-            while (!int.TryParse(Console.ReadLine(), out output))
-            { }
-            return output;
-        }
     }
 }

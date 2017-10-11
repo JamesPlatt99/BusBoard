@@ -14,7 +14,8 @@ namespace BusBoard.ConsoleApp
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             UserLocation userLocation = GetUserLocation.ReturnUserLocation(GetPostCode());
-            List<StopPoint> localStopPoints = GetLocalStopPoints.ReturnStopPoints(userLocation);
+
+            List<StopPoint> localStopPoints = GetLocalStopPoints.ReturnStopPoints(userLocation, GetUserMaxDistanceFromStation());
 
             DisplayAvailableStops(localStopPoints);
             string busStop = localStopPoints[GetBusStop(localStopPoints.Count)].naptanId;
@@ -27,6 +28,13 @@ namespace BusBoard.ConsoleApp
 
             Console.ReadLine();
 
+        }
+        private static int GetUserMaxDistanceFromStation()
+        {
+            int output;
+            while (!int.TryParse(Console.ReadLine(), out output))
+            { }
+            return output;
         }
 
         private static void DisplayArrivals(List<Arrival> arrivals)

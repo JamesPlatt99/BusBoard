@@ -11,5 +11,6 @@ namespace BusBoard.Api
         public string VehicleID { get; set; }
         public string Direction { get; set; }
         public DateTime ExpectedArrival { get; set; }
+        public string DestinationName { get; set; }
     }
 }

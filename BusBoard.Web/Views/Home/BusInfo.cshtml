@@ -1,4 +1,5 @@
-﻿@using BusBoard.Web.Models
+﻿@using BusBoard.Api
+@using BusBoard.Web.Models
 @model BusBoard.Web.ViewModels.BusInfo
 @{
   ViewBag.Title = "Bus Information";
@@ -8,6 +9,53 @@
 
 <div class="row">
     
-    <p>You entered postcode @Model.PostCode</p>
-    
+    <table cellpadding="8">
+        <tr>
+            <td>
+                <b>
+                    <a href ="?naptamID=@Model.naptamID&sortBy=Time">
+                        Time
+                    </a>
+                </b>
+            </td>
+            <td>
+                <b> 
+                    <a href="?naptamID=@Model.naptamID&sortBy=Destination">
+                        Destination
+                    </a>
+                </b>
+            </td>
+            <td>
+                <b>
+                    <a href="?naptamID=@Model.naptamID&sortBy=Direction">
+                        Direction
+                    </a>
+                </b>
+            </td>
+            <td>
+                <b>
+                    <a href="?naptamID=@Model.naptamID&sortBy=VehicleID">
+                        VehicleID
+                    </a>
+                </b>
+            </td>
+        </tr>
+        @foreach (Arrival arrival in @Model.Arrivals)
+        {
+            <tr>
+                <td>
+                    @arrival.ExpectedArrival.ToShortTimeString()
+                </td>
+                <td>
+                    @arrival.DestinationName
+                </td>
+                <td>
+                    @arrival.Direction
+                </td>
+                <td>
+                    @arrival.VehicleID
+                </td>
+            </tr>
+        }
+    </table>
 </div>

@@ -1,17 +1,28 @@
-﻿@@using BusBoard.Web.Models
+﻿@using BusBoard.Api
+@using BusBoard.Web.Models
+@using BusBoard.Web.ViewModels
 @model BusBoard.Web.ViewModels.ChooseStop
 @{
-    ViewBag.Title = "Choose stop";
+    ViewBag.Title = "ChooseStop";
 }
-<!DOCTYPE html>
 
-<html>
-<head>
+<h2>Stations</h2>
+
+<div class="row">
     
-</head>
-    <body>
-        <div>
-      
-        </div>
-    </body>
-</html>
+        @if (Model.StopPoints !=null && Model.StopPoints.Count > 0)
+        {
+            foreach (StopPoint stop in Model.StopPoints)
+            {
+                <p>
+                    <a href="BusInfo?naptamID=@stop.naptanId">
+                        @stop.commonName - @stop.naptanId
+                    </a>
+                </p>
+            }
+        }
+        else
+        {
+            <p>There are no stops in the given range</p>
+        }
+</div>

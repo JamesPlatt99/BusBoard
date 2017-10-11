@@ -25,12 +25,17 @@
     <div class="col-md-12">
         @using (Html.BeginForm("ChooseStop", "Home", FormMethod.Get))
         {
-        <fieldset>
-            <legend>Post Code:</legend>
-            @Html.TextBoxFor(m => m.Postcode)
+            <fieldset>
+                <legend>Post Code:</legend>
+                @Html.TextBoxFor(m => m.Postcode)
+                <legend>Max Distance(m):</legend>
+                @Html.TextBoxFor(n => n.MaxDistance)
 
-            <input type="submit" value="Get Bus Info" />
-        </fieldset>
+                <input type="submit" value="Get Bus Info"/>
+            </fieldset>
         }
     </div>
 </div>
+<marquee scrollamount="20" direction="right">
+    <img src="https://i.imgur.com/V1Q8Dc2.png">
+</marquee>

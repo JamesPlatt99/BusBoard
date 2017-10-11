@@ -1,19 +1,24 @@
 ﻿using System.Collections.Generic;
 using BusBoard.Api;
+using BusBoard.Web.Models;
 
 namespace BusBoard.Web.ViewModels
 {
     public class ChooseStop
     {
-        public ChooseStop(string postCode)
+        public ChooseStop(PostcodeSelection selection)
         {
-            List <StopPoint> localStops = GetLocalStops(postCode);
+            StopPoints = GetLocalStops(selection.Postcode, selection.MaxDistance);
+            PostCode = selection.Postcode;
         }
+
+        public List<StopPoint> StopPoints { get; set; }
         public string PostCode { get; set; }
-        public static List<StopPoint> GetLocalStops(string postCode)
+
+        private List<StopPoint> GetLocalStops(string postCode, int maxDistance)
         {
             UserLocation userLocation = GetUserLocation.ReturnUserLocation(postCode);
-            return GetLocalStopPoints.ReturnStopPoints(userLocation);
+            return GetLocalStopPoints.ReturnStopPoints(userLocation, maxDistance);
         }
     }
 }
