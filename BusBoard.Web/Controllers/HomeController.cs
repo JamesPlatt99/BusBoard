@@ -26,6 +26,7 @@ namespace BusBoard.Web.Controllers
                     ChooseStop stop = new ChooseStop(selection);
                     return View(stop);
             }
+            
             return View("Index");
         }
 
