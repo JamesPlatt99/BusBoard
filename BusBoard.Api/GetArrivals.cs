@@ -23,17 +23,17 @@ namespace BusBoard.Api
 
         private static List<Arrival> RemovePastArrivals(List<Arrival> arrivals)
         {
-            return arrivals;
-            //List<Arrival> futureArrivals = new List<Arrival>();
-            //foreach (Arrival arrival in arrivals)
-            //{
-            //    int result = DateTime.Compare(arrival.ExpectedArrival, DateTime.Now);
-            //    if (result >= 0)
-            //    {
-            //        futureArrivals.Add(arrival);
-            //    }
-            //}
-            //return futureArrivals;
+            List<Arrival> futureArrivals = new List<Arrival>();
+            foreach (Arrival arrival in arrivals)
+            {
+                arrival.ExpectedArrival = arrival.ExpectedArrival.ToLocalTime();
+                int result = DateTime.Compare(arrival.ExpectedArrival, DateTime.Now);
+                if (result >= 0)
+                {
+                    futureArrivals.Add(arrival);
+                }
+            }
+            return futureArrivals;
         }
     }
 }

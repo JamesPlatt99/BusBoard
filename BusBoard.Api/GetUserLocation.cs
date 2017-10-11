@@ -6,10 +6,8 @@ namespace BusBoard.Api
 {
     public class GetUserLocation
     {
-        public static UserLocation ReturnUserLocation()
+        public static UserLocation ReturnUserLocation(string postCode)
         {
-            Console.Write("Please enter your postcode: ");
-            string postCode = Console.ReadLine();
             RestClient client = new RestClient("http://api.postcodes.io/postcodes/");
             RestRequest request = new RestRequest(postCode, Method.GET);
             IRestResponse response = client.Execute(request);

@@ -2,12 +2,9 @@
 {
   public class BusInfo
   {
-    public BusInfo(string postCode)
+    public BusInfo()
     {
-      PostCode = postCode;
     }
-
-    public string PostCode { get; set; }
-
+      
   }
 }

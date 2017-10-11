@@ -13,7 +13,7 @@ namespace BusBoard.ConsoleApp
         private static void Main()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            UserLocation userLocation = GetUserLocation.ReturnUserLocation();
+            UserLocation userLocation = GetUserLocation.ReturnUserLocation(GetPostCode());
             List<StopPoint> localStopPoints = GetLocalStopPoints.ReturnStopPoints(userLocation);
 
             DisplayAvailableStops(localStopPoints);
@@ -55,6 +55,13 @@ namespace BusBoard.ConsoleApp
             {
                 Console.WriteLine("   {0} {1} {2}", i, localStopPoints[i].commonName, localStopPoints[i].naptanId);
             }
+        }
+
+        private static string GetPostCode()
+        {
+            Console.Write("Please enter your postcode: ");
+            string postCode = Console.ReadLine();
+            return postCode;
         }
 
         private static int GetBusStop(int numStops)
