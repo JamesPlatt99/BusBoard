@@ -17,6 +17,7 @@ namespace BusBoard.Web.ViewModels
         public string CommonName { get; set; }
         private List<Arrival> sortArrivals(List<Arrival> arrivals, StationID stationID)
         {
+            arrivals = arrivals.OrderBy(n => n.ExpectedArrival).ToList();
             switch (stationID.sortBy)
             {
                 case "Time":

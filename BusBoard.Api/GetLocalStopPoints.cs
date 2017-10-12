@@ -7,7 +7,7 @@ namespace BusBoard.Api
 {
     public class GetLocalStopPoints
     {
-        public static List<StopPoint> ReturnStopPoints(UserLocation userLocation, int radius)
+        public static List<StopPoint> ReturnStopPoints(UserLocation userLocation, string radius)
         {
             RestClient client = new RestClient("https://api.tfl.gov.uk/");
             RestRequest request = new RestRequest("StopPoint", Method.GET);

@@ -15,7 +15,7 @@ namespace BusBoard.Web.ViewModels
         public List<StopPoint> StopPoints { get; set; }
         public string PostCode { get; set; }
 
-        private List<StopPoint> GetLocalStops(string postCode, int maxDistance)
+        private List<StopPoint> GetLocalStops(string postCode, string maxDistance)
         {
             UserLocation userLocation = GetUserLocation.ReturnUserLocation(postCode);
             return GetLocalStopPoints.ReturnStopPoints(userLocation, maxDistance);

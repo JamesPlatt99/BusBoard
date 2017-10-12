@@ -4,6 +4,6 @@
   {
     public string Postcode { get; set; }
     public string Error { get; set; }
-    public int MaxDistance { get; set; }
+    public string MaxDistance { get; set; }
   }
 }

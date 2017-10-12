@@ -1,9 +1,28 @@
 ﻿@using BusBoard.Api
 @using BusBoard.Web.Models
+@using System.Threading;
 @model BusBoard.Web.ViewModels.BusInfo
 @{
   ViewBag.Title = "Bus Information";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+@{
+    if (@Model.Arrivals.Count == 0)
+    {
+            <h1>
+                There are no busses at this stop!
+            </h1>
+            <marquee scrollamount="20">
+                <img src="http://clipart-library.com/images/di9radxAT.jpg" height="180">
+                <img src="http://wp.production.patheos.com/blogs/friendlyatheist/files/2016/11/shutterstock_457511662.jpg" height="180">
+                <img src="https://image.freepik.com/free-photo/sad-man-with-a-thumb-down_1187-2910.jpg" height="180">
+                <img src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX10618969.jpg" height="180">
+                <img src="https://www.k2.pl/mediafiles/uploads/gallery/e8d9c0b68a1112b8b4fdc0fe3849e278.jpg" height="180">
+                <img src="https://the5thelementmag.files.wordpress.com/2015/12/ifwt_jordan_crying.png?w=579" height="180">
+                <img src="http://sites.psu.edu/siowfa15/wp-content/uploads/sites/29639/2015/09/Tears2.jpg" height="180">
+            </marquee>
+    }
+    else { 
 <h2>Schedule - @Model.CommonName</h2>
 <div class="row">
     <table cellpadding="8">
@@ -36,6 +55,13 @@
                     </a>
                 </b>
             </td>
+            <td>
+                <b>
+                    <a href="?naptamID=@Model.naptamID&sortBy=Time">
+                        Time until arrival
+                    </a>
+                </b>
+            </td>
         </tr>
         @foreach (Arrival arrival in @Model.Arrivals)
         {
@@ -52,16 +78,35 @@
                 <td>
                     @arrival.VehicleID
                 </td>
+                <td>
+                    @{
+                        TimeSpan timeSpan = @arrival.ExpectedArrival - DateTime.Now;
+                    }
+                    @String.Format("{0:hh\\:mm\\:ss}", timeSpan)
+                </td>
             </tr>
         }
     </table>
 </div>
 
-<marquee scrollamount="20">
-    <img src="https://image.freepik.com/free-photo/happy-guy-with-thumb-up-on-white-background_1149-197.jpg" height="180"></img>
-    <img src="https://ih1.redbubble.net/image.135305313.7505/flat,1000x1000,075,f.jpg" height="180"></img>
-    <img src="https://bbsimg.ngfiles.com/1/22201000/ngbbs4d0d11296e2a9.jpg" height="180"></img>
-    <img src="http://plansrunner.com/wp-content/uploads/2015/10/Thumbs-Up-Guy-1.png" height="180"></img>
-    <img src="http://www.picdesi.com/upload/comment/congrat/congratulation-043.gif" height="180"></img>
-    <img src="http://www.sowhatsallthebuzz.com/wp-content/uploads/2010/06/excited-people.jpg" height="180"></img>
-</marquee>
+        <marquee scrollamount="20">
+            <img src="https://image.freepik.com/free-photo/happy-guy-with-thumb-up-on-white-background_1149-197.jpg" height="180">
+            <img src="https://ih1.redbubble.net/image.135305313.7505/flat,1000x1000,075,f.jpg" height="180">
+            <img src="https://bbsimg.ngfiles.com/1/22201000/ngbbs4d0d11296e2a9.jpg" height="180">
+            <img src="http://plansrunner.com/wp-content/uploads/2015/10/Thumbs-Up-Guy-1.png" height="180">
+            <img src="http://www.picdesi.com/upload/comment/congrat/congratulation-043.gif" height="180">
+            <img src="http://www.sowhatsallthebuzz.com/wp-content/uploads/2010/06/excited-people.jpg" height="180">
+        </marquee>
+    }
+}
+@{
+    Refresher refresher = new Refresher();
+    StationID stationID = new StationID
+    {
+        commonName = @Model.CommonName,
+        naptamID = @Model.naptamID
+    };
+
+    Thread myThread = new Thread(() => refresher.refresh(stationID));
+    myThread.Start();
+}

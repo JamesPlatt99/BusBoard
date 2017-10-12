@@ -29,10 +29,10 @@ namespace BusBoard.ConsoleApp
             Console.ReadLine();
 
         }
-        private static int GetUserMaxDistanceFromStation()
+        private static string GetUserMaxDistanceFromStation()
         {
-            int output;
-            while (!int.TryParse(Console.ReadLine(), out output))
+            string output;
+            while (!int.TryParse(output = Console.ReadLine(), out int val))
             { }
             return output;
         }

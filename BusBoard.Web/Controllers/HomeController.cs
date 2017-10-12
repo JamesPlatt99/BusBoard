@@ -20,13 +20,19 @@ namespace BusBoard.Web.Controllers
 
         public ActionResult ChooseStop(PostcodeSelection selection)
         {
+            PostcodeSelection error;
             ValidatePostCode validatePostCode = new ValidatePostCode(selection);
             if (validatePostCode.valid)
             {
+                int i = 0;
+                if(int.TryParse(selection.MaxDistance, out i)) { 
                     ChooseStop stop = new ChooseStop(selection);
                     return View(stop);
+                }
+                error = new PostcodeSelection { Error = "Invalid max distance." };
+                return View("Index", error);
             }
-            PostcodeSelection error = new PostcodeSelection {Error = "Invalid post code"};
+            error = new PostcodeSelection {Error = "Invalid post code"};
             return View("Index", error);
         }
 
