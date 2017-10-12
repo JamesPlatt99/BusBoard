@@ -25,6 +25,10 @@ namespace BusBoard.Web.Controllers
             if (validatePostCode.valid)
             {
                 int i = 0;
+                if (selection.MaxDistance == null)
+                {
+                    selection.MaxDistance = "200";
+                }
                 if(int.TryParse(selection.MaxDistance, out i)) { 
                     ChooseStop stop = new ChooseStop(selection);
                     return View(stop);
