@@ -26,8 +26,8 @@ namespace BusBoard.Web.Controllers
                     ChooseStop stop = new ChooseStop(selection);
                     return View(stop);
             }
-            
-            return View("Index");
+            PostcodeSelection error = new PostcodeSelection {Error = "Invalid post code"};
+            return View("Index", error);
         }
 
         public ActionResult About()

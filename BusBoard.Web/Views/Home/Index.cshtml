@@ -24,9 +24,15 @@
     <div class="col-md-12">
         @using (Html.BeginForm("ChooseStop", "Home", FormMethod.Get))
         {
+            <div style="color: crimson; font-size: 16px;">
+                @if (@Model != null)
+                {
+                    @Model.Error
+                }
+            </div>
             <fieldset>
                 <legend>Post Code:</legend>
-                @Html.TextBoxFor(m => m.Postcode)
+                @Html.TextBoxFor(m => m.Postcode)<br><br>
                 <legend>Max Distance(m):</legend>
                 @Html.TextBoxFor(n => n.MaxDistance)
 

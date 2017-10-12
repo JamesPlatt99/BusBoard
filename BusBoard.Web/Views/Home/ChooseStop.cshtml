@@ -15,7 +15,7 @@
             foreach (StopPoint stop in Model.StopPoints)
             {
                 <p>
-                    <a href="BusInfo?naptamID=@stop.naptanId">
+                    <a href="BusInfo?naptamID=@stop.naptanId&commonName=@stop.commonName">
                         @stop.commonName - @stop.naptanId
                     </a>
                 </p>

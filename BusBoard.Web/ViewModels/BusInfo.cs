@@ -11,8 +11,10 @@ namespace BusBoard.Web.ViewModels
         {
             Arrivals = sortArrivals(GetArrivals.ReturnArrivals(stationID.naptamID), stationID);
             naptamID = stationID.naptamID;
+            CommonName = stationID.commonName;
         }
 
+        public string CommonName { get; set; }
         private List<Arrival> sortArrivals(List<Arrival> arrivals, StationID stationID)
         {
             switch (stationID.sortBy)
