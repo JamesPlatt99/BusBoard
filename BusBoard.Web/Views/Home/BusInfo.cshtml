@@ -4,9 +4,9 @@
 @model BusBoard.Web.ViewModels.BusInfo
 @{
   ViewBag.Title = "Bus Information";
-}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-@{
+    <script>
+        setTimeout('window.location.reload();', 30000);
+    </script>
     if (@Model.Arrivals.Count == 0)
     {
             <h1>
@@ -23,71 +23,71 @@
             </marquee>
     }
     else { 
-<h2>Schedule - @Model.CommonName</h2>
-<div class="row">
-    <table cellpadding="8">
-        <tr>
-            <td>
-                <b>
-                    <a href ="?naptamID=@Model.naptamID&sortBy=Time">
-                        Time
-                    </a>
-                </b>
-            </td>
-            <td>
-                <b> 
-                    <a href="?naptamID=@Model.naptamID&sortBy=Destination">
-                        Destination
-                    </a>
-                </b>
-            </td>
-            <td>
-                <b>
-                    <a href="?naptamID=@Model.naptamID&sortBy=Direction">
-                        Direction
-                    </a>
-                </b>
-            </td>
-            <td>
-                <b>
-                    <a href="?naptamID=@Model.naptamID&sortBy=VehicleID">
-                        VehicleID
-                    </a>
-                </b>
-            </td>
-            <td>
-                <b>
-                    <a href="?naptamID=@Model.naptamID&sortBy=Time">
-                        Time until arrival
-                    </a>
-                </b>
-            </td>
-        </tr>
-        @foreach (Arrival arrival in @Model.Arrivals)
-        {
-            <tr>
-                <td>
-                    @arrival.ExpectedArrival.ToShortTimeString()
-                </td>
-                <td>
-                    @arrival.DestinationName
-                </td>
-                <td>
-                    @arrival.Direction
-                </td>
-                <td>
-                    @arrival.VehicleID
-                </td>
-                <td>
-                    @{
-                        TimeSpan timeSpan = @arrival.ExpectedArrival - DateTime.Now;
-                    }
-                    @String.Format("{0:hh\\:mm\\:ss}", timeSpan)
-                </td>
-            </tr>
-        }
-    </table>
-</div>
+        <h2>Schedule - @Model.CommonName</h2>
+        <div class="row">
+            <table cellpadding="8">
+                <tr>
+                    <td>
+                        <b>
+                            <a href ="?naptamID=@Model.naptamID&sortBy=Time">
+                                Time
+                            </a>
+                        </b>
+                    </td>
+                    <td>
+                        <b> 
+                            <a href="?naptamID=@Model.naptamID&sortBy=Destination">
+                                Destination
+                            </a>
+                        </b>
+                    </td>
+                    <td>
+                        <b>
+                            <a href="?naptamID=@Model.naptamID&sortBy=Direction">
+                                Direction
+                            </a>
+                        </b>
+                    </td>
+                    <td>
+                        <b>
+                            <a href="?naptamID=@Model.naptamID&sortBy=VehicleID">
+                                VehicleID
+                            </a>
+                        </b>
+                    </td>
+                    <td>
+                        <b>
+                            <a href="?naptamID=@Model.naptamID&sortBy=Time">
+                                Time until arrival
+                            </a>
+                        </b>
+                    </td>
+                </tr>
+                @foreach (Arrival arrival in @Model.Arrivals)
+                {
+                    <tr>
+                        <td>
+                            @arrival.ExpectedArrival.ToShortTimeString()
+                        </td>
+                        <td>
+                            @arrival.DestinationName
+                        </td>
+                        <td>
+                            @arrival.Direction
+                        </td>
+                        <td>
+                            @arrival.VehicleID
+                        </td>
+                        <td>
+                            @{
+                                TimeSpan timeSpan = @arrival.ExpectedArrival - DateTime.Now;
+                            }
+                            @String.Format("{0:hh\\:mm\\:ss}", timeSpan)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
 
         <marquee scrollamount="20">
             <img src="https://image.freepik.com/free-photo/happy-guy-with-thumb-up-on-white-background_1149-197.jpg" height="180">
@@ -98,8 +98,6 @@
             <img src="http://www.sowhatsallthebuzz.com/wp-content/uploads/2010/06/excited-people.jpg" height="180">
         </marquee>
     }
-}
-@{
     Refresher refresher = new Refresher();
     StationID stationID = new StationID
     {
